@@ -3,10 +3,8 @@ package main.BankApp.Users;
 import main.BankApp.Queries.SQL;
 
 public class User {
-    private int id;
-    private String name;
-    private String username;
-    private String password;
+    private int id, accountNumber;
+    private String name, username, password, accountType;
     private double balance;
     private boolean loggedin = false;
     private boolean loginfail = false;
@@ -55,7 +53,7 @@ public class User {
         this.name = name;
     }
 
-    //get & set username
+    //get & set username------------------------------------------------------------------
     public String getUsername(){
         return username;
     }
@@ -63,7 +61,7 @@ public class User {
         this.username = username;
     }
 
-    //get &set password
+    //get &set password------------------------------------------------------------------
     public String getPassword(){
         return password;
     }
@@ -71,7 +69,7 @@ public class User {
         this.password = password;
     }
 
-    //get & set login
+    //get & set login------------------------------------------------------------------
     public boolean isLoggedin(){
         return loggedin;
     }
@@ -79,7 +77,7 @@ public class User {
         this.loggedin = loggedin;
     }
 
-    //get & set login failure
+    //get & set login failure------------------------------------------------------------------
     public boolean isLoginfail(){
         return loginfail;
     }
@@ -87,7 +85,23 @@ public class User {
         this.loginfail = loginfail;
     }
 
-    //get & set balance
+    //get & set account number------------------------------------------------------------------
+    public int getAccountNum(){
+        return accountNumber;
+    }
+    public void setAccountNum(int accountNumber) {
+        this.accountNumber = accountNumber;
+    }
+
+    //get & set account type------------------------------------------------------------------
+    public String getAccountType(){
+        return accountType;
+    }
+    public void setAccountType(String accountType){
+        this.accountType = accountType;
+    }
+
+    //get & set balance------------------------------------------------------------------
     public double getBalance(){
         return balance;
     }
