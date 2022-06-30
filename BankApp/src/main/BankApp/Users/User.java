@@ -3,9 +3,10 @@ package main.BankApp.Users;
 import main.BankApp.Queries.SQL;
 
 public class User {
-    private int id, accountNumber;
-    private String name, username, password, accountType;
-    private double balance;
+    private int id;
+    private String name, username, password;
+
+    //private double balance = 0;
     private boolean loggedin = false;
     private boolean loginfail = false;
 
@@ -13,22 +14,8 @@ public class User {
     static SQL sql = new SQL();
 
     //------------------------ methods -----------------------
-    //create account
-    public void createAccount(User user) {
-        //
-    }
     //login
     public void login(User user){
-        //
-    }
-
-    //deposit
-    public void deposit(User user, double amount) {
-        //
-    }
-
-    //withdraw
-    public void withdraw (User user, double amount){
         //
     }
 
@@ -83,29 +70,5 @@ public class User {
     }
     public void setLoginfail(boolean loginfail){
         this.loginfail = loginfail;
-    }
-
-    //get & set account number------------------------------------------------------------------
-    public int getAccountNum(){
-        return accountNumber;
-    }
-    public void setAccountNum(int accountNumber) {
-        this.accountNumber = accountNumber;
-    }
-
-    //get & set account type------------------------------------------------------------------
-    public String getAccountType(){
-        return accountType;
-    }
-    public void setAccountType(String accountType){
-        this.accountType = accountType;
-    }
-
-    //get & set balance------------------------------------------------------------------
-    public double getBalance(){
-        return balance;
-    }
-    public void setBalance(double balance){
-        this.balance = balance;
     }
 }
