@@ -50,8 +50,8 @@ public class Main {
                         + "----------------------------------------------------\n"
                         + "	Account Balance: $" + user.getBalance() + "\n\n"
                         + "	1. Make Deposit\n"
-                        + "	2. Make Withdrawal\n\n"
-                        + "	3. Logout\n"
+                        + "	2. Make Withdrawal\n"
+                        + "	3. Logout\n\n"
                         + "----------------------------------------------------\n"
                         + "What would you like to do?"
                 );
