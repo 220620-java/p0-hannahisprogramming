@@ -1,8 +1,6 @@
-package main.BankApp.Main;
+package main.BankApp.main;
 
-//import ...
-
-import main.BankApp.Users.User;
+import main.BankApp.models.User;
 
 import java.util.Scanner;
 
@@ -10,12 +8,12 @@ public class Main {
     public static User user = new User();
     static Scanner scanner = new Scanner(System.in);
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         boolean banking = true;
 
         while(banking) {
             //login menu
-            if(!user.isLoggedin()) {
+            if(user == null) {
                 System.out.println(
                         "----------------------------------------\n"
                         + "Welcome to The Bank\n"
@@ -32,6 +30,7 @@ public class Main {
                         //login();
                         break;
                     case 2:
+                        user.createUser();
                         //createAccount();
                         break;
                     case 3:
@@ -44,11 +43,11 @@ public class Main {
                 System.out.println(
                         " Welcome back to The Bank, " + user.getName() + "\n"
                         + "----------------------------------------------------\n"
-                        + " Account Type: " + user.getAccountType() + "\n"
+                        + " Account Type: " + user.getAccount().getAccountType() + "\n"
                         + "----------------------------------------------------\n"
                         + " Account No: " + user.getAccountNum() + "\n"
                         + "----------------------------------------------------\n"
-                        + "	Account Balance: $" + user.getBalance() + "\n\n"
+                        + "	Account Balance: $" + getBalance() + "\n\n"
                         + "	1. Make Deposit\n"
                         + "	2. Make Withdrawal\n"
                         + "	3. Logout\n\n"
@@ -65,7 +64,7 @@ public class Main {
                         break;
                     case 3:
                         System.out.println("Thank you for using our mobile banking!");
-                        user.setLoggedIn(false);
+                        banking = false;
                 }
             }
         }
