@@ -27,4 +27,26 @@ public class ArrayList<X> implements List<X>{
             this.add(obj);
         }
     }
+
+    // index methods
+    @Override
+    public X get(int index) {
+        if(index>=0 && index < this.nextIndex) {
+            return this.array[index];
+        } else {
+            throw new IndexOutOfBoundsException();
+        }
+    }
+
+    @Override
+    public int indexOf(X obj) {
+        for(int i = 0; i < this.nextIndex; i++) {
+            if (obj == null) {
+                if (this.array[i] == null) return i;
+            } else if (obj.equals(this.array[i])) {
+                return i;
+            }
+        }
+        return -1;
+    }
 }
