@@ -13,6 +13,8 @@ public class UserSQL implements UserDao {
     @Override
     public User create(User user) {
         try (Connection conn = connUtil.getConnection()) {
+            conn.setAutoCommit(false);
+
             String sql = "insert into users" + "(id, username, password)" + "values (default, ?, ?)";
             String[] keys = {"id"};
 
@@ -40,6 +42,8 @@ public class UserSQL implements UserDao {
         User user = null;
 
         try (Connection conn = connUtil.getConnection()) {
+            conn.setAutoCommit(false);
+
             String sql = "SELECT * from users WHERE username = ?;";
 
             PreparedStatement stmt = conn.prepareStatement(sql);

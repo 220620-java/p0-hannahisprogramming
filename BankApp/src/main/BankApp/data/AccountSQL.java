@@ -14,6 +14,8 @@ public class AccountSQL implements AccountDao {
     @Override
     public Account create(Account account, String type, double balance, User user){
         try (Connection conn = ConnectUtil.getConnection()){
+            conn.setAutoCommit(false);
+
             String sql = "insert into accounts" + "(id, type, balance, userId)" + "values (default, ?, ?, ?)";
             String[] keys = {"id"};
 
@@ -42,6 +44,8 @@ public class AccountSQL implements AccountDao {
     @Override
     public Account get(Account account, User user){
         try (Connection conn = ConnectUtil.getConnection()){
+            conn.setAutoCommit(false);
+
             String sql = "SELECT * from accounts WHERE user_id = ?;";
             PreparedStatement statement = conn.prepareStatement(sql);
             statement.setInt(1, user.getId());
@@ -64,6 +68,8 @@ public class AccountSQL implements AccountDao {
     public Account updateBalance(Account account, double balance, double amount) {
         double newBalance = balance + amount;
         try (Connection conn = ConnectUtil.getConnection()){
+            conn.setAutoCommit(false);
+
             String sql = "UPDATE accounts SET balance = ? WHERE id = ?";
 
             PreparedStatement statement = conn.prepareStatement(sql);
