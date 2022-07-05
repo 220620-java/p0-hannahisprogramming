@@ -1,4 +1,4 @@
-package main.BankApp.data;
+package main.BankApp.data.interfaces;
 
 import main.BankApp.models.Account;
 import main.BankApp.models.User;

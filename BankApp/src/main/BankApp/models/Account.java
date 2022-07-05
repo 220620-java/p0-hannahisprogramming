@@ -17,11 +17,12 @@ public class Account {
         this.type = "";
         this.balance = 0;
     }
-    public Account(String type, double balance){
+    public Account(int id, String type, double balance, int userId){
         super();
-        //this.id = id;
+        this.id = id;
         this.type = type;
         this.balance = balance;
+        this.userId = userId;
     }
     //------------------------ methods -----------------------
     public void createAccount(User user) {
@@ -35,7 +36,7 @@ public class Account {
         }
         System.out.println("How much would you like your initial deposit to be?");
         double balance = scanner.nextDouble();
-        Account account = new Account(accountType, balance);
+        Account account = new Account(id, accountType, balance, userId);
 
     }
 
@@ -51,4 +52,7 @@ public class Account {
     //get & set balance------------------------------------------------------------------
     public double getBalance(){ return balance; }
     public void setBalance(double balance){ this.balance = balance; }
+
+    //get user id------------------------------------------------------------------
+    public int getUserId() { return userId; }
 }

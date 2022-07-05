@@ -1,5 +1,6 @@
-package main.BankApp.data;
+package main.BankApp.data.methods;
 
+import main.BankApp.data.interfaces.UserDao;
 import main.BankApp.models.User;
 import main.BankApp.utils.ConnectUtil;
 import java.sql.Connection;
@@ -46,10 +47,10 @@ public class UserSQL implements UserDao {
 
             String sql = "SELECT * from users WHERE username = ?;";
 
-            PreparedStatement stmt = conn.prepareStatement(sql);
-            stmt.setString(1, username);
+            PreparedStatement statement = conn.prepareStatement(sql);
+            statement.setString(1, username);
 
-            ResultSet resultSet = stmt.executeQuery();
+            ResultSet resultSet = statement.executeQuery();
 
             if (resultSet.next()) {
                 int setId = resultSet.getInt("id");

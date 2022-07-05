@@ -1,5 +1,6 @@
-package main.BankApp.data;
+package main.BankApp.data.methods;
 
+import main.BankApp.data.interfaces.AccountDao;
 import main.BankApp.utils.ConnectUtil;
 import main.BankApp.models.Account;
 import main.BankApp.models.User;
@@ -28,6 +29,7 @@ public class AccountSQL implements AccountDao {
             ResultSet resultSet = statement.getGeneratedKeys();
             if (resultSet.next() && rowsAffected == 1) {
                 account.setId(resultSet.getInt("id"));
+                account.setAccountType(type);
                 account.setBalance(balance);
                 conn.commit();
             } else {
