@@ -8,19 +8,19 @@ public class Account {
     //------------------------ variables -----------------------
     static Scanner scanner = new Scanner(System.in);
     private int id, userId;
-    private String accountType;
+    private String type;
     private double balance;
     //------------------------ classes -----------------------
     public Account() {
         super();
         this.id = 0;
-        this.accountType = "";
+        this.type = "";
         this.balance = 0;
     }
-    public Account(String accountType, double balance){
+    public Account(String type, double balance){
         super();
         //this.id = id;
-        this.accountType = accountType;
+        this.type = type;
         this.balance = balance;
     }
     //------------------------ methods -----------------------
@@ -45,8 +45,8 @@ public class Account {
     public void setId(int id) { this.id = id; }
 
     //get & set account type------------------------------------------------------------------
-    public String getAccountType(){ return accountType; }
-    public void setAccountType(String accountType){ this.accountType = accountType; }
+    public String getAccountType(){ return type; }
+    public void setAccountType(String type){ this.type = type; }
 
     //get & set balance------------------------------------------------------------------
     public double getBalance(){ return balance; }

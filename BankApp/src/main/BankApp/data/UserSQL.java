@@ -1,22 +1,22 @@
 package main.BankApp.data;
 
-import main.BankApp.utils.Connect;
 import main.BankApp.models.User;
-
+import main.BankApp.utils.ConnectUtil;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class UserSQL implements UserDao {
-    private Connect connection = Connect.connectToDb();
+    private ConnectUtil connUtil = ConnectUtil.getConnectUtil();
 
     @Override
     public User create(User user) {
-        try (connection) {
+        try (Connection conn = connUtil.getConnection()) {
             String sql = "insert into bank.users" + "(id, username, password)" + "values (default, ?, ?)";
             String[] keys = {"id"};
 
-            PreparedStatement stmt = connection.prepareStatement(sql, keys);
+            PreparedStatement stmt = conn.prepareStatement(sql, keys);
             stmt.setString(1, user.getUsername());
             stmt.setString(2, user.getPassword());
 
@@ -24,9 +24,9 @@ public class UserSQL implements UserDao {
             ResultSet resultSet = stmt.getGeneratedKeys();
             if(resultSet.next() && rowsAffected == 1) {
                 user.setId(resultSet.getInt("id"));
-                connection.commit();
+                conn.commit();
             } else {
-                connection.rollback();
+                conn.rollback();
                 return null;
             }
         } catch (SQLException e) {
@@ -39,10 +39,10 @@ public class UserSQL implements UserDao {
     public User findByUsername(String username) {
         User user = null;
 
-        try (connection) {
+        try (Connection conn = connUtil.getConnection()) {
             String sql = "SELECT * from bank.users WHERE username = ?;";
 
-            PreparedStatement stmt = connection.prepareStatement(sql);
+            PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, username);
 
             ResultSet resultSet = stmt.executeQuery();

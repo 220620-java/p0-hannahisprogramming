@@ -1,5 +1,4 @@
 package main.BankApp.service;
 
-public class AccountService {
-
+public interface UserServiceI {
 }
