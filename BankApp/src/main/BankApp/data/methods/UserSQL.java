@@ -16,15 +16,16 @@ public class UserSQL implements UserDao {
         try (Connection conn = connUtil.getConnection()) {
             conn.setAutoCommit(false);
 
-            String sql = "insert into users" + "(id, username, password)" + "values (default, ?, ?)";
+            String sql = "insert into users" + "(id, full_name, username, password)" + "values (default, ?, ?, ?)";
             String[] keys = {"id"};
 
-            PreparedStatement stmt = conn.prepareStatement(sql, keys);
-            stmt.setString(1, user.getUsername());
-            stmt.setString(2, user.getPassword());
+            PreparedStatement statement = conn.prepareStatement(sql, keys);
+            statement.setString(1, user.getName());
+            statement.setString(2, user.getUsername());
+            statement.setString(3, user.getPassword());
 
-            int rowsAffected = stmt.executeUpdate();
-            ResultSet resultSet = stmt.getGeneratedKeys();
+            int rowsAffected = statement.executeUpdate();
+            ResultSet resultSet = statement.getGeneratedKeys();
             if(resultSet.next() && rowsAffected == 1) {
                 user.setId(resultSet.getInt("id"));
                 conn.commit();

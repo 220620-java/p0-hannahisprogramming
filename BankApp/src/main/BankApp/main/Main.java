@@ -2,17 +2,18 @@ package main.BankApp.main;
 
 import main.BankApp.models.Account;
 import main.BankApp.models.User;
+import main.BankApp.service.UserService;
 
 import java.util.Scanner;
 
 public class Main {
-    public static User user = new User();
     public static Account account = new Account();
+    public static UserService userServ = new UserService();
     static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) throws Exception {
         boolean banking = true;
-
+        User user = null;
         while(banking) {
             //login menu
             if(user == null) {
@@ -32,8 +33,9 @@ public class Main {
                         //login();
                         break;
                     case 2:
-                        user.createUser();
-                        //createAccount();
+                        User newUser = new User();
+                        newUser.createUser();
+                        userServ.createUser(newUser);
                         break;
                     case 3:
                         banking = false;

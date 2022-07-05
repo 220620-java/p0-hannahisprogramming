@@ -10,9 +10,8 @@ public class UserService {
 
     //add username exception
     //@Override
-    public User create(int id, String name, String username, String password) {
-        User user;
-        user = new User(id, name, username, password);
+    public User createUser(User user) {
+        userDao.create(user);
         return user;
     }
 
