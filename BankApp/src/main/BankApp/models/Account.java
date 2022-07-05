@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class Account {
     //------------------------ variables -----------------------
     static Scanner scanner = new Scanner(System.in);
-    private int id;
+    private int id, userId;
     private String accountType;
     private double balance;
     //------------------------ classes -----------------------
