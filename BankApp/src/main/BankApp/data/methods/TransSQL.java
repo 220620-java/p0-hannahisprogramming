@@ -17,7 +17,7 @@ public class TransSQL implements TransDao {
         try (Connection conn = ConnectUtil.getConnection()){
             conn.setAutoCommit(false);
 
-            String sql = "insert into transactions" + "(id, transType, amount, userId)" + "values (default, ?, ?, ?)";
+            String sql = "insert into transactions" + "(id, trans_type, amount, user_id)" + "values (default, ?, ?, ?)";
             String[] keys = {"id"};
 
             PreparedStatement statement = conn.prepareStatement(sql, keys);

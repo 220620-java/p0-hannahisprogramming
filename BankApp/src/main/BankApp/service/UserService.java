@@ -16,5 +16,7 @@ public class UserService {
     }
 
     //@Override
-    public User findByUsername(String username) {return userDao.findByUsername(username);}
+    public User findByUsername(String username) {
+        return userDao.findByUsername(username);
+    }
 }
