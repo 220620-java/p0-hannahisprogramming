@@ -1,6 +1,6 @@
 package main.BankApp.data;
 
-import main.BankApp.db.Connect;
+import main.BankApp.utils.Connect;
 import main.BankApp.models.Account;
 import main.BankApp.models.User;
 

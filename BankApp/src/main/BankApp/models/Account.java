@@ -41,26 +41,14 @@ public class Account {
 
     //------------------------ getters & setters -----------------------
     //get & set account number------------------------------------------------------------------
-    public int getId(){
-        return id;
-    }
-    public void setId(int id) {
-        this.id = id;
-    }
+    public int getId() { return id; }
+    public void setId(int id) { this.id = id; }
 
     //get & set account type------------------------------------------------------------------
-    public String getAccountType(){
-        return accountType;
-    }
-    public void setAccountType(String accountType){
-        this.accountType = accountType;
-    }
+    public String getAccountType(){ return accountType; }
+    public void setAccountType(String accountType){ this.accountType = accountType; }
 
     //get & set balance------------------------------------------------------------------
-    public double getBalance(){
-        return balance;
-    }
-    public void setBalance(double balance){
-        this.balance = balance;
-    }
+    public double getBalance(){ return balance; }
+    public void setBalance(double balance){ this.balance = balance; }
 }
