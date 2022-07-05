@@ -1,11 +1,13 @@
 package main.BankApp.main;
 
+import main.BankApp.models.Account;
 import main.BankApp.models.User;
 
 import java.util.Scanner;
 
 public class Main {
     public static User user = new User();
+    public static Account account = new Account();
     static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) throws Exception {
@@ -43,11 +45,9 @@ public class Main {
                 System.out.println(
                         " Welcome back to The Bank, " + user.getName() + "\n"
                         + "----------------------------------------------------\n"
-                        + " Account Type: " + user.getAccount().getAccountType() + "\n"
+                        + " Account Type: " + account.getAccountType() + "\n"
                         + "----------------------------------------------------\n"
-                        + " Account No: " + user.getAccountNum() + "\n"
-                        + "----------------------------------------------------\n"
-                        + "	Account Balance: $" + getBalance() + "\n\n"
+                        + "	Account Balance: $" + account.getBalance() + "\n\n"
                         + "	1. Make Deposit\n"
                         + "	2. Make Withdrawal\n"
                         + "	3. Logout\n\n"

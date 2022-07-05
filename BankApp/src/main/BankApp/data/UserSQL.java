@@ -13,7 +13,7 @@ public class UserSQL implements UserDao {
     @Override
     public User create(User user) {
         try (Connection conn = connUtil.getConnection()) {
-            String sql = "insert into bank.users" + "(id, username, password)" + "values (default, ?, ?)";
+            String sql = "insert into users" + "(id, username, password)" + "values (default, ?, ?)";
             String[] keys = {"id"};
 
             PreparedStatement stmt = conn.prepareStatement(sql, keys);
@@ -40,7 +40,7 @@ public class UserSQL implements UserDao {
         User user = null;
 
         try (Connection conn = connUtil.getConnection()) {
-            String sql = "SELECT * from bank.users WHERE username = ?;";
+            String sql = "SELECT * from users WHERE username = ?;";
 
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, username);
