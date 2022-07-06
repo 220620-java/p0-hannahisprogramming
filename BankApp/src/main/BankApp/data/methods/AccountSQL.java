@@ -4,10 +4,8 @@ import main.BankApp.data.interfaces.AccountDao;
 import main.BankApp.utils.ConnectUtil;
 import main.BankApp.models.Account;
 import main.BankApp.models.User;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+
+import java.sql.*;
 
 public class AccountSQL implements AccountDao {
     private final ConnectUtil connUtil = ConnectUtil.getConnectUtil();
@@ -48,7 +46,7 @@ public class AccountSQL implements AccountDao {
         try (Connection conn = ConnectUtil.getConnection()){
             conn.setAutoCommit(false);
 
-            String sql = "SELECT * from accounts WHERE user_id = ?;";
+            String sql = "select * from accounts where user_id = ?;";
             PreparedStatement statement = conn.prepareStatement(sql);
             statement.setInt(1, user.getId());
 
@@ -67,18 +65,63 @@ public class AccountSQL implements AccountDao {
     }
 
     @Override
-    public Account updateBalance(Account account, double balance, double amount) {
-        double newBalance = balance + amount;
-        try (Connection conn = ConnectUtil.getConnection()){
+    public Account getAccountInfo(User user) {
+        Account account = new Account();
+        int userId = user.getId();
+        try (Connection conn = connUtil.getConnection()) {
             conn.setAutoCommit(false);
 
-            String sql = "UPDATE accounts SET balance = ? WHERE id = ?";
+            String sql = "select * from accounts where user_id = ?;";
+
+            PreparedStatement statement = conn.prepareStatement(sql);
+            statement.setInt(1, userId);
+
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                int setId = resultSet.getInt("id");
+                String setType = resultSet.getString("account_type");
+                double setBalance = resultSet.getDouble("balance");
+                int setUserId = resultSet.getInt("user_id");
+
+                account = new Account(setId, setType, setBalance, setUserId);
+            } else {
+                return null;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return account;
+    }
+
+    @Override
+    public Account updateBalance(Account account, double balance, String transType, double amount) {
+        double newBalance;
+        System.out.println(transType);
+        if (transType == "Deposit") {
+            newBalance = balance + amount;
+        } else if ((balance - amount) < 0){
+            System.out.println(
+                    "-------------------------------------------\n"
+                    + "You are trying to overdraw your account!\n"
+                    + "-------------------------------------------\n"
+            );
+            newBalance = balance;
+        } else {
+            newBalance = balance - amount;
+        }
+        System.out.println(newBalance);
+
+        try (Connection conn = ConnectUtil.getConnection()){
+            conn.setAutoCommit(false);
+            int accountId = account.getId();
+            String sql = "update accounts set balance = ? where id = ?;";
 
             PreparedStatement statement = conn.prepareStatement(sql);
             statement.setDouble(1, newBalance);
-            statement.setInt(2, account.getId());
+            statement.setInt(2, accountId);
 
-            statement.executeUpdate(sql);
+            statement.executeUpdate();
             statement.close();
         } catch (SQLException e) {
             e.printStackTrace();

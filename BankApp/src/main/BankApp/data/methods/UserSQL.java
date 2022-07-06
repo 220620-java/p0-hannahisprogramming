@@ -1,6 +1,7 @@
 package main.BankApp.data.methods;
 
 import main.BankApp.data.interfaces.UserDao;
+import main.BankApp.models.Account;
 import main.BankApp.models.User;
 import main.BankApp.utils.ConnectUtil;
 import java.sql.Connection;

@@ -17,13 +17,22 @@ public class Account {
         this.type = "";
         this.balance = 0;
     }
-    public Account(int id, String type, double balance, int userId){
+    public Account(int id, String type, double balance, User user){
+        super();
+        this.id = id;
+        this.type = type;
+        this.balance = balance;
+        this.userId = user.getId();
+    }
+
+    public Account(int id, String type, double balance, int userId) {
         super();
         this.id = id;
         this.type = type;
         this.balance = balance;
         this.userId = userId;
     }
+
     //------------------------ methods -----------------------
     public void createAccount(User user) {
         System.out.println("Would you like a Savings(1) or Checking account(2)?");
@@ -38,7 +47,11 @@ public class Account {
         }
         System.out.println("How much would you like your initial deposit to be?");
         balance = scanner.nextDouble();
-        Account account = new Account(id, type, balance, userId);
+        Account account = new Account(id, type, balance, user);
+    }
+    @Override
+    public String toString() {
+        return "User [id=" + id + ", type =" + type + ", balance=" + balance + ", userId=" + userId + "]";
     }
 
     //------------------------ getters & setters -----------------------

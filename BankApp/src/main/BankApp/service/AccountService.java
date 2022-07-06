@@ -20,8 +20,14 @@ public class AccountService {
         return account;
     }
 
-    public Account updateBalance(Account account, double balance, double amount) {
-        accountDao.updateBalance(account, balance, amount);
+    public Account getAccount(User user) {
+        Account account = new Account();
+        account = accountDao.getAccountInfo(user);
+        return account;
+    }
+
+    public Account updateBalance(Account account, double balance, String transType, double amount) {
+        accountDao.updateBalance(account, balance, transType, amount);
         return account;
     }
 }

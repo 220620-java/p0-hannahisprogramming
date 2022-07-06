@@ -63,6 +63,8 @@ public class Main {
     }
     public static void userMenu(User user) {
         System.out.println(user.toString());
+        account = accountServ.getAccount(user);
+        System.out.println(account.toString());
         boolean banking = true;
         while (banking) {
             System.out.println(
@@ -84,7 +86,11 @@ public class Main {
                 case 2:
                     Transaction newTrans = new Transaction();
                     newTrans.createTransaction(account);
+                    String transType = newTrans.getTransType();
+                    double amount = newTrans.getAmount();
+                    System.out.println(transType + " " + amount);
                     transServ.createTrans(newTrans, account.getId(), newTrans.getTransType(), newTrans.getAmount(), account);
+                    accountServ.updateBalance(account, account.getBalance(),transType, amount);
                     break;
                 case 3:
                     System.out.println("Thank you for using our mobile banking!");
