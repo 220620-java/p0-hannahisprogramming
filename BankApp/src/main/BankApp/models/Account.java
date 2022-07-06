@@ -31,13 +31,14 @@ public class Account {
         String accountType;
         if (selection == 1) {
             accountType = "Savings";
+        } else if (selection == 2) {
+            accountType = "Checking";
         } else {
             accountType = "Checking";
         }
         System.out.println("How much would you like your initial deposit to be?");
         double balance = scanner.nextDouble();
         Account account = new Account(id, accountType, balance, userId);
-
     }
 
     //------------------------ getters & setters -----------------------

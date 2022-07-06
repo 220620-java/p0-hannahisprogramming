@@ -28,7 +28,6 @@ public class Transaction {
         String transType;
         System.out.println("Would you like to make a Deposit(1) or a Withdrawal(2)?");
         int selection = scanner.nextInt();
-        String accountType;
         if (selection == 1) {
             transType = "Deposit";
         } else {
