@@ -99,17 +99,16 @@ public class AccountSQL implements AccountDao {
         double newBalance;
         if (transType == "Deposit") {
             newBalance = balance + amount;
-        } else if ((balance - amount) < 0){
-            System.out.println(
-                    "-------------------------------------------\n"
-                    + "You are trying to overdraw your account!\n"
-                    + "-------------------------------------------\n"
-            );
-            newBalance = balance;
+//        } else if ((balance - amount) < 0){
+//            System.out.println(
+//                    "-------------------------------------------\n"
+//                    + "You are trying to overdraw your account!\n"
+//                    + "-------------------------------------------\n"
+//            );
+//            newBalance = balance;
         } else {
             newBalance = balance - amount;
         }
-        System.out.println(newBalance);
 
         try (Connection conn = ConnectUtil.getConnection()){
             conn.setAutoCommit(false);
@@ -121,10 +120,12 @@ public class AccountSQL implements AccountDao {
             statement.setInt(2, accountId);
 
             statement.executeUpdate();
+            conn.commit();
             statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
         return account;
     }
 }

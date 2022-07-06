@@ -63,11 +63,9 @@ public class Main {
         }
     }
     public static void userMenu(User user) {
-        System.out.println(user.toString());
-        account = accountServ.getAccount(user);
-        System.out.println(account.toString());
         boolean banking = true;
         while (banking) {
+            account = accountServ.getAccount(user);
             System.out.println(
                     "----------------------------------------------------\n"
                             + " Welcome back to The Bank, " + user.getName() + "\n"
@@ -76,7 +74,8 @@ public class Main {
                             + "----------------------------------------------------\n"
                             + "	Account Balance: $" + account.getBalance() + "\n\n"
                             + "	1. Adjust your account\n"
-                            + "	2. Logout\n\n"
+                            + "    2. View your transactions\n"
+                            + "	3. Logout\n\n"
                             + "----------------------------------------------------\n"
                             + "What would you like to do?"
             );
@@ -85,11 +84,27 @@ public class Main {
                 case 1:
                     Transaction newTrans = new Transaction();
                     newTrans.createTransaction(account);
-                    transaction = transServ.createTrans(newTrans, account.getId(), newTrans.getTransType(), newTrans.getAmount(), account);
-                    System.out.println(transaction.toString());
+                    if (newTrans.getTransType() == "Withdrawal" && newTrans.getAmount() > account.getBalance()) {
+                        System.out.println(
+                                "-------------------------------------------\n"
+                                + "You are trying to overdraw your account!\n"
+                                + "-------------------------------------------\n"
+                        );
+                    } else if (newTrans.getAmount() < 0) {
+                        System.out.println(
+                                "-------------------------------------------\n"
+                                + "You can't enter a negative amount!\n"
+                                + "-------------------------------------------\n"
+                        );
+                    } else {
+                        transaction = transServ.createTrans(newTrans, account.getId(), newTrans.getTransType(), newTrans.getAmount(), account);
+                    }
                     accountServ.updateBalance(account, account.getBalance(), transaction.getTransType(), transaction.getAmount());
                     break;
                 case 2:
+                    System.out.println(transServ.findTransactions(account));
+                    break;
+                case 3:
                     System.out.println("Thank you for using our mobile banking!");
                     banking = false;
             }
