@@ -1,7 +1,9 @@
 package main.BankApp.main;
 
 import main.BankApp.models.Account;
+import main.BankApp.models.Transaction;
 import main.BankApp.models.User;
+import main.BankApp.service.TransService;
 import main.BankApp.service.UserService;
 
 import java.util.Scanner;
@@ -9,6 +11,7 @@ import java.util.Scanner;
 public class Main {
     public static Account account = new Account();
     public static UserService userServ = new UserService();
+    public static TransService transServ = new TransService();
     static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) throws Exception {
@@ -59,10 +62,10 @@ public class Main {
                 int selection = scanner.nextInt();
                 switch(selection) {
                     case 1:
-                        //deposit();
-                        break;
                     case 2:
-                        //withdraw();
+                        Transaction newTrans = new Transaction();
+                        newTrans.createTransaction(account);
+                        transServ.createTrans(newTrans, account.getId(), newTrans.getTransType(), newTrans.getAmount(), account);
                         break;
                     case 3:
                         System.out.println("Thank you for using our mobile banking!");
