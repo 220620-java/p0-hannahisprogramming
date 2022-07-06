@@ -46,7 +46,35 @@ public class UserSQL implements UserDao {
         try (Connection conn = connUtil.getConnection()) {
             conn.setAutoCommit(false);
 
-            String sql = "SELECT * from users WHERE username = ?;";
+            String sql = "select * from users where username = ?;";
+
+            PreparedStatement statement = conn.prepareStatement(sql);
+            statement.setString(1, username);
+
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                String setUsername = resultSet.getString("username");
+                String setPassword = resultSet.getString("password");
+
+                user = new User(setUsername, setPassword);
+            } else {
+                return user;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return user;
+    }
+
+    @Override
+    public User getUserInfo(User user) {
+        String username = user.getUsername();
+        try (Connection conn = connUtil.getConnection()) {
+            conn.setAutoCommit(false);
+
+            String sql = "select * from users where username = ?;";
 
             PreparedStatement statement = conn.prepareStatement(sql);
             statement.setString(1, username);
@@ -55,18 +83,17 @@ public class UserSQL implements UserDao {
 
             if (resultSet.next()) {
                 int setId = resultSet.getInt("id");
-                String setName = resultSet.getString("name");
+                String setName = resultSet.getString("full_name");
                 String setUsername = resultSet.getString("username");
                 String setPassword = resultSet.getString("password");
 
                 user = new User(setId, setName, setUsername, setPassword);
             } else {
-                return user;
+                return null;
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return user;
     }
 }

@@ -9,6 +9,7 @@ public class User {
     private int id;
     private String name, username, password;
     private List<Account> accounts;
+    private String password1;
 
 
     //------------------------ classes -----------------------
@@ -21,6 +22,12 @@ public class User {
         this.accounts = new ArrayList<>();
     }
 
+    public User (String username, String password) {
+        super();
+        this.username = username;
+        this.password = password;
+    }
+
     public User (int id, String name, String username, String password){
         super();
         this.id = id;
@@ -31,8 +38,13 @@ public class User {
     }
 
     //------------------------ methods -----------------------
-    public void login(User user){
-        //
+    public void login(){
+        System.out.println("What is your username?");
+        String username = scanner.nextLine();
+        System.out.println("What is your password?");
+        String password = scanner.nextLine();
+        setUsername(username);
+        setPassword(password);
     }
     public void createUser() throws Exception {
         System.out.println("Enter your full name:");
@@ -44,6 +56,10 @@ public class User {
         setName(name);
         setUsername(username);
         setPassword(password);
+    }
+    @Override
+    public String toString() {
+        return "User [id=" + id + ", name =" + name + ", username=" + username + ", password=" + password + "]";
     }
 
     //------------------------ getters & setters -----------------------

@@ -15,6 +15,18 @@ public class UserService {
         return user;
     }
 
+    public User login(String username, String password){
+        User user = findByUsername(username);
+        if(user != null && password.equals(user.getPassword())) {
+            System.out.println("You're logged in!");
+            user = userDao.getUserInfo(user);
+            return user;
+        } else {
+            System.out.println("Your credentials didn't match!");
+            return null;
+        }
+    }
+
     //@Override
     public User findByUsername(String username) {
         return userDao.findByUsername(username);
