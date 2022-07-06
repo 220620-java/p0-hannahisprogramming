@@ -25,7 +25,6 @@ public class Transaction {
     }
     //------------------------ methods -----------------------
     public void createTransaction(Account account) {
-        String transType;
         System.out.println("Would you like to make a Deposit(1) or a Withdrawal(2)?");
         int selection = scanner.nextInt();
         if (selection == 1) {
@@ -34,8 +33,13 @@ public class Transaction {
             transType = "Withdrawal";
         }
         System.out.println("How much would you like your " + transType.toLowerCase() + " to be?");
-        double amount = scanner.nextDouble();
+        amount = scanner.nextDouble();
         Transaction transaction = new Transaction(id, transType, amount, account);
+    }
+
+    @Override
+    public String toString() {
+        return "User [id=" + id + ", transType =" + transType + ", amount=" + amount + ", acctId=" + accountId + "]";
     }
 
     //------------------------ getters & setters -----------------------
@@ -50,4 +54,9 @@ public class Transaction {
     //get & set trans amount------------------------------------------------------------------
     public double getAmount(){ return amount; }
     public void setAmount(double amount){ this.amount = amount; }
+
+    //get & set account id
+    public int getAccountId(){ return accountId; }
+    public void setAccountId(int accountId) { this.accountId = accountId; }
+
 }

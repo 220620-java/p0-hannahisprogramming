@@ -15,11 +15,6 @@ public class AccountService {
         return account;
     }
 
-    public Account getAccount(Account account, User user) {
-        accountDao.get(account, user);
-        return account;
-    }
-
     public Account getAccount(User user) {
         Account account = new Account();
         account = accountDao.getAccountInfo(user);

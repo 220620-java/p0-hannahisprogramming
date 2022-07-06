@@ -41,28 +41,28 @@ public class AccountSQL implements AccountDao {
         return account;
     }
 
-    @Override
-    public Account get(Account account, User user){
-        try (Connection conn = ConnectUtil.getConnection()){
-            conn.setAutoCommit(false);
-
-            String sql = "select * from accounts where user_id = ?;";
-            PreparedStatement statement = conn.prepareStatement(sql);
-            statement.setInt(1, user.getId());
-
-            ResultSet resultSet = statement.executeQuery();
-            if(resultSet.next()) {
-                double balance = resultSet.getDouble("balance");
-                int id = resultSet.getInt("id");
-
-                account.setBalance(balance);
-                account.setId(id);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return account;
-    }
+//    @Override
+//    public Account get(Account account, User user){
+//        try (Connection conn = ConnectUtil.getConnection()){
+//            conn.setAutoCommit(false);
+//
+//            String sql = "select * from accounts where user_id = ?;";
+//            PreparedStatement statement = conn.prepareStatement(sql);
+//            statement.setInt(1, user.getId());
+//
+//            ResultSet resultSet = statement.executeQuery();
+//            if(resultSet.next()) {
+//                double balance = resultSet.getDouble("balance");
+//                int id = resultSet.getInt("id");
+//
+//                account.setBalance(balance);
+//                account.setId(id);
+//            }
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//        return account;
+//    }
 
     @Override
     public Account getAccountInfo(User user) {
@@ -97,7 +97,6 @@ public class AccountSQL implements AccountDao {
     @Override
     public Account updateBalance(Account account, double balance, String transType, double amount) {
         double newBalance;
-        System.out.println(transType);
         if (transType == "Deposit") {
             newBalance = balance + amount;
         } else if ((balance - amount) < 0){

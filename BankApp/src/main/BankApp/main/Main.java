@@ -11,6 +11,7 @@ import java.util.Scanner;
 
 public class Main {
     public static Account account = new Account();
+    public static Transaction transaction = new Transaction();
     public static UserService userServ = new UserService();
     public static AccountService accountServ = new AccountService();
     public static TransService transServ = new TransService();
@@ -74,25 +75,21 @@ public class Main {
                             + " Account Type: " + account.getAccountType() + "\n"
                             + "----------------------------------------------------\n"
                             + "	Account Balance: $" + account.getBalance() + "\n\n"
-                            + "	1. Make Deposit\n"
-                            + "	2. Make Withdrawal\n"
-                            + "	3. Logout\n\n"
+                            + "	1. Adjust your account\n"
+                            + "	2. Logout\n\n"
                             + "----------------------------------------------------\n"
                             + "What would you like to do?"
             );
             int selection = scanner.nextInt();
             switch (selection) {
                 case 1:
-                case 2:
                     Transaction newTrans = new Transaction();
                     newTrans.createTransaction(account);
-                    String transType = newTrans.getTransType();
-                    double amount = newTrans.getAmount();
-                    System.out.println(transType + " " + amount);
-                    transServ.createTrans(newTrans, account.getId(), newTrans.getTransType(), newTrans.getAmount(), account);
-                    accountServ.updateBalance(account, account.getBalance(),transType, amount);
+                    transaction = transServ.createTrans(newTrans, account.getId(), newTrans.getTransType(), newTrans.getAmount(), account);
+                    System.out.println(transaction.toString());
+                    accountServ.updateBalance(account, account.getBalance(), transaction.getTransType(), transaction.getAmount());
                     break;
-                case 3:
+                case 2:
                     System.out.println("Thank you for using our mobile banking!");
                     banking = false;
             }

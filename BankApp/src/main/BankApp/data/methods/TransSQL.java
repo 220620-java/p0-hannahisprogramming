@@ -25,18 +25,19 @@ public class TransSQL implements TransDao {
             statement.setDouble(2, amount);
             statement.setInt(3, account.getId());
 
-            statement.executeUpdate();
-//            int rowsAffected = statement.executeUpdate();
-//            ResultSet resultSet = statement.getGeneratedKeys();
-//            if (resultSet.next() && rowsAffected == 1) {
-//                transaction.setId(resultSet.getInt("id"));
-//                transaction.setTransType(transType);
-//                transaction.setAmount(amount);
-//                conn.commit();
-//            } else {
-//                conn.rollback();
-//                return null;
-//            }
+            //statement.executeUpdate();
+            int rowsAffected = statement.executeUpdate();
+            ResultSet resultSet = statement.getGeneratedKeys();
+            if (resultSet.next() && rowsAffected == 1) {
+                transaction.setId(resultSet.getInt("id"));
+                transaction.setTransType(transType);
+                transaction.setAmount(amount);
+                transaction.setAccountId(account.getId());
+                conn.commit();
+            } else {
+                conn.rollback();
+                return null;
+            }
 
         } catch (SQLException e) {
             e.printStackTrace();
