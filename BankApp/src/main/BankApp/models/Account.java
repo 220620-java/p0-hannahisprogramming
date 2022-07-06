@@ -30,15 +30,15 @@ public class Account {
         int selection = scanner.nextInt();
         String accountType;
         if (selection == 1) {
-            accountType = "Savings";
+            type = "Savings";
         } else if (selection == 2) {
-            accountType = "Checking";
+            type = "Checking";
         } else {
-            accountType = "Checking";
+            type = "Checking";
         }
         System.out.println("How much would you like your initial deposit to be?");
-        double balance = scanner.nextDouble();
-        Account account = new Account(id, accountType, balance, userId);
+        balance = scanner.nextDouble();
+        Account account = new Account(id, type, balance, userId);
     }
 
     //------------------------ getters & setters -----------------------
@@ -53,7 +53,4 @@ public class Account {
     //get & set balance------------------------------------------------------------------
     public double getBalance(){ return balance; }
     public void setBalance(double balance){ this.balance = balance; }
-
-    //get user id------------------------------------------------------------------
-    public int getUserId() { return userId; }
 }
