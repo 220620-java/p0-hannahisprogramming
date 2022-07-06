@@ -3,6 +3,7 @@ package main.BankApp.main;
 import main.BankApp.models.Account;
 import main.BankApp.models.Transaction;
 import main.BankApp.models.User;
+import main.BankApp.service.AccountService;
 import main.BankApp.service.TransService;
 import main.BankApp.service.UserService;
 
@@ -11,6 +12,7 @@ import java.util.Scanner;
 public class Main {
     public static Account account = new Account();
     public static UserService userServ = new UserService();
+    public static AccountService accountServ = new AccountService();
     public static TransService transServ = new TransService();
     static Scanner scanner = new Scanner(System.in);
 
@@ -36,9 +38,14 @@ public class Main {
                         //login();
                         break;
                     case 2:
+                        //create user in db
                         User newUser = new User();
                         newUser.createUser();
                         userServ.createUser(newUser);
+                        //create account in db
+                        Account newAccount = new Account();
+                        newAccount.createAccount(newUser);
+                        accountServ.createAccount(newAccount, newAccount.getAccountType(), newAccount.getBalance(), newUser);
                         break;
                     case 3:
                         banking = false;

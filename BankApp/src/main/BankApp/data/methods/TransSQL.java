@@ -17,7 +17,7 @@ public class TransSQL implements TransDao {
         try (Connection conn = ConnectUtil.getConnection()){
             conn.setAutoCommit(false);
 
-            String sql = "insert into transactions" + "(id, trans_type, amount, user_id)" + "values (default, ?, ?, ?)";
+            String sql = "insert into transactions" + "(id, trans_type, amount, account_id)" + "values (default, ?, ?, ?)";
             String[] keys = {"id"};
 
             PreparedStatement statement = conn.prepareStatement(sql, keys);
@@ -50,7 +50,7 @@ public class TransSQL implements TransDao {
         try (Connection conn = ConnectUtil.getConnection()){
             conn.setAutoCommit(false);
 
-            String sql = "SELECT * from transactions WHERE account_id = ?;";
+            String sql = "select * from transactions where account_id = ?;";
 
             PreparedStatement statement = conn.prepareStatement(sql);
             statement.setInt(1, account.getId());

@@ -17,7 +17,7 @@ public class AccountSQL implements AccountDao {
         try (Connection conn = ConnectUtil.getConnection()){
             conn.setAutoCommit(false);
 
-            String sql = "insert into accounts" + "(id, type, balance, userId)" + "values (default, ?, ?, ?)";
+            String sql = "insert into accounts" + "(id, account_type, balance, user_id)" + "values (default, ?, ?, ?)";
             String[] keys = {"id"};
 
             PreparedStatement statement = conn.prepareStatement(sql, keys);
